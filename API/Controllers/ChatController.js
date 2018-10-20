@@ -18,22 +18,11 @@ function getTeamInfo(req, res) {
     WhitelistEntry.findOne({
         name: teamToSearch
     }, function (err, teamExists) {
-        if (err) {
-            return res.json({
-                fulfillmentText: 'Something went wrong!',
-                source: 'team info'
-            });
-        }
-        if (teamExists) {
-            return res.json({
-                fulfillmentText: teamExists.description,
-                source: 'team info'
-            });
-        } else {
-            return res.json({
-                fulfillmentText: 'Currently I am not having information about this team',
-                source: 'team info'
-            });
-        }
+
+    });
+
+    return res.json({
+        fulfillmentText: req.body.queryResult.parameters.URL || "none",
+        source: 'team info'
     });
 }
