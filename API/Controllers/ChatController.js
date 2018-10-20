@@ -3,10 +3,7 @@ var mongoose = require('mongoose');
 var WhitelistEntry = mongoose.model('WhitelistEntry');
 
 exports.processRequest = function (req, res) {
-    console.log(req.body);
-    if (req.body.queryResult.action == "schedule") {
-        //getTeamSchedule(req, res)
-    } else if (req.body.queryResult.action == "tell.about") {
+    if (req.body.queryResult.action == "check.url") {
         getTeamInfo(req, res)
     }
 };
@@ -22,7 +19,7 @@ function getTeamInfo(req, res) {
     });
 
     return res.json({
-        fulfillmentText: req.body.queryResult.parameters.URL || "none",
-        source: 'team info'
+        fulfillmentText: req.body.queryResult.parameters.URL || "none" + " looks good!",
+        source: 'backend check'
     });
 }
