@@ -12,6 +12,9 @@ function checkUrl(url) {
     if (url.includes("google")) {
         return "Google is neutral! 🏳";
     }
+    else if (url.includes("breitbart")) {
+        return "That's very likely to be a fake! 😱";
+    }
     return "I don't know about that one 🤷🏽‍♀️"
 }
 
