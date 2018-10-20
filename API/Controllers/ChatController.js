@@ -4,12 +4,15 @@ var WhitelistEntry = mongoose.model('WhitelistEntry');
 var BlacklistEntry = mongoose.model('BlacklistEntry');
 
 let GOOD_RESPONSE = [
-    "That one seems to be good!",
+    "That one seems to be good! 👍🏾",
+    "The page is trustworthy 😇",
+    "The page is serious 🤓",
 ];
 
 let BAD_RESPONSE = [
     "My fake detection is about to explode! 😱🌋",
     "That's fake! 😠",
+    "Do not trust that one please! 🤐",
 ];
 
 let NEUTRAL_RESPONSE = [
