@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var WhitelistEntry = mongoose.model('WhitelistEntry');
 
 exports.processRequest = function (req, res) {
+    console.log(req.body);
     if (req.body.result.action == "schedule") {
         //getTeamSchedule(req, res)
     } else if (req.body.result.action == "tell.about") {
