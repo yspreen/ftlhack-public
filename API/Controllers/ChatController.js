@@ -3,6 +3,20 @@ var mongoose = require('mongoose');
 var WhitelistEntry = mongoose.model('WhitelistEntry');
 var BlacklistEntry = mongoose.model('BlacklistEntry');
 
+let GOOD_RESPONSE = [
+    "That one seems to be good!",
+];
+
+let BAD_RESPONSE = [
+    "My fake detection is about to explode! 😱🌋",
+    "That's fake! 😠",
+];
+
+let NEUTRAL_RESPONSE = [
+    "I don't know about that one 🤷🏽‍♀️",
+    "I get mixed feelings here 🧐",
+]
+
 exports.processRequest = async function (req, res) {
     if (req.body.queryResult.action == "check.url") {
         getTeamInfo(req, res)
@@ -51,11 +65,11 @@ async function checkUrl(url, callback) {
             if (url.includes("google")) {
                 return callback("Google is neutral! 🏳");
             } else if (result === -1) {
-                return callback(["My fake detection is about to explode! 😱🌋", "That's fake!"]);
+                return callback(BAD_RESPONSE);
             } else if (result === +1) {
-                return callback(["That one seems to be good!"]);
+                return callback(GOOD_RESPONSE);
             }
-            return callback("I don't know about that one 🤷🏽‍♀️");
+            return callback(NEUTRAL_RESPONSE);
         });
     });
 }
