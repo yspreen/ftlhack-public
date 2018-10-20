@@ -62,7 +62,7 @@ async function checkUrl(url, callback) {
                 result = +1
             }
         }, () => {
-            if (url.includes("google")) {
+            if (url.match(/^(https?:\/\/)?(www\.)?google.\w{2,3}/)) {
                 return callback("Google is neutral! 🏳");
             } else if (result === -1) {
                 return callback(BAD_RESPONSE);
