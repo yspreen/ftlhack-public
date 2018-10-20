@@ -40,14 +40,40 @@ function s_to_r(str) {
     regex: r_to_s(/^(https?:\/\/)?(www\.)?breitbart.\w{2,3}/),
 })).save();*/
 
+function domainFromURL(url) {
+    if (url.startsWith("http://")) {
+        url = url.substr(7);
+    }
+    if (url.startsWith("https://")) {
+        url = url.substr(8);
+    }
+    if (url.startsWith("www.")) {
+        url = url.substr(4);
+    }
+    if (url.startsWith("m.")) {
+        url = url.substr(2);
+    }
+    if (url.startsWith("mobile.")) {
+        url = url.substr(7);
+    }
+
+    return url.split(".")[0];
+}
+
 async function addBlack(req, res) {
-    console.warn(req.body.queryResult.outputContexts[0].parameters);
+    let url = req.body.queryResult.outputContexts[0].parameters.URL;
+
+    (new BlacklistEntry({
+        name: 'generated',
+        regex: "^(https?:\/\/)?(www\.)?" + domainFromURL(url) + ".\w{2,3}",
+    })).save()
 
     return res.json({
         fulfillmentText: "Thank's for telling me!",
         source: 'backend check'
     });
 }
+
 async function checkUrl(url, callback) {
     let stop = false;
     let result = 0;
