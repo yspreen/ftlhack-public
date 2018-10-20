@@ -13,13 +13,15 @@ let BAD_RESPONSE = [
 ];
 
 let NEUTRAL_RESPONSE = [
-    "I don't know about that one 🤷🏽‍♀️",
-    "I get mixed feelings here 🧐",
+    "I don't know about that one 🤷🏽‍♀️\nYou can tell me about this site to teach me! 👩🏽‍🏫",
+    "I get mixed feelings here 🧐\nYou can tell me about this site to teach me! 👩🏽‍🏫",
 ]
 
 exports.processRequest = async function (req, res) {
     if (req.body.queryResult.action == "check.url") {
         getTeamInfo(req, res)
+    } else {
+        console.warn(req.body.queryResult);
     }
 };
 
