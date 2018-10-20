@@ -4,16 +4,16 @@ var WhitelistEntry = mongoose.model('WhitelistEntry');
 
 exports.processRequest = function (req, res) {
     console.log(req.body);
-    if (req.body.result.action == "schedule") {
+    if (req.queryResult.action == "schedule") {
         //getTeamSchedule(req, res)
-    } else if (req.body.result.action == "tell.about") {
+    } else if (req.queryResult.action == "tell.about") {
         getTeamInfo(req, res)
     }
 };
 
 
 function getTeamInfo(req, res) {
-    let teamToSearch = req.body.result && req.body.result.parameters && req.body.result.parameters.team ? req.body.result.parameters.team : 'Unknown';
+    let teamToSearch = req.queryResult && req.queryResult.parameters && req.queryResult.parameters.team ? req.queryResult.parameters.team : 'Unknown';
     console.info(teamToSearch);
     WhitelistEntry.findOne({
         name: teamToSearch
