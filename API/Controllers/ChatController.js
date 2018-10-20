@@ -19,7 +19,7 @@ function getTeamInfo(req, res) {
     });
 
     return res.json({
-        fulfillmentText: req.body.queryResult.parameters.URL || "none" + " looks good!",
+        fulfillmentText: (req.body.queryResult.parameters.URL || "none") + " looks good!",
         source: 'backend check'
     });
 }
