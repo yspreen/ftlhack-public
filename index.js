@@ -5,7 +5,8 @@ var express = require('express'),
     config = require('./config'),
     server = express(),
     mongoose = require('mongoose'),
-    WhitelistEntry = require('./API/Models/WhitelistEntry');
+    WhitelistEntry = require('./API/Models/WhitelistEntry'),
+    BlacklistEntry = require('./API/Models/BlacklistEntry');
 // mongoose instance connection url connection
 mongoose.Promise = global.Promise;
 mongoose.connect(config.dbUrl);
@@ -15,6 +16,7 @@ server.use(bodyParser.urlencoded({
 server.use(bodyParser.json());
 var routes = require('./API/Routes/Routes'); //importing route
 routes(server); //register the route
-server.listen((process.env.PORT || 8000), function () {
-    console.log("Server is up and listening on port" + process.env.PORT);
+let port = process.env.PORT || 8000
+server.listen(port, function () {
+    console.log("Server is up and listening on port " + port);
 });

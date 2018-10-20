@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var WhitelistEntry = new Schema({
+var BlacklistEntry = new Schema({
     name: {
         type: String,
         required: true
@@ -10,4 +10,4 @@ var WhitelistEntry = new Schema({
         required: true
     }
 });
-module.exports = mongoose.model('WhitelistEntry', WhitelistEntry);
+module.exports = mongoose.model('BlacklistEntry', BlacklistEntry);
