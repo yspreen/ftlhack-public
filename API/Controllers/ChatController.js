@@ -20,21 +20,18 @@ function getTeamInfo(req, res) {
     }, function (err, teamExists) {
         if (err) {
             return res.json({
-                speech: 'Something went wrong!',
-                displayText: 'Something went wrong!',
+                fulfillmentText: 'Something went wrong!',
                 source: 'team info'
             });
         }
         if (teamExists) {
             return res.json({
-                speech: teamExists.description,
-                displayText: teamExists.description,
+                fulfillmentText: teamExists.description,
                 source: 'team info'
             });
         } else {
             return res.json({
-                speech: 'Currently I am not having information about this team',
-                displayText: 'Currently I am not having information about this team',
+                fulfillmentText: 'Currently I am not having information about this team',
                 source: 'team info'
             });
         }
