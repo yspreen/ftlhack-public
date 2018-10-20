@@ -8,6 +8,12 @@ exports.processRequest = function (req, res) {
     }
 };
 
+function checkUrl(url) {
+    if (url.includes("google")) {
+        return "Google is neutral! 🏳";
+    }
+    return "I don't know about that one 🤷🏽‍♀️"
+}
 
 function getTeamInfo(req, res) {
     let teamToSearch = req.body.queryResult && req.body.queryResult.parameters && req.body.queryResult.parameters.team ? req.body.queryResult.parameters.team : 'Unknown';
@@ -18,8 +24,15 @@ function getTeamInfo(req, res) {
 
     });
 
+    if (req.body.queryResult.parameters.URL) {
+        return res.json({
+            fulfillmentText: checkUrl(req.body.queryResult.parameters.URL),
+            source: 'backend check'
+        });
+    }
+
     return res.json({
-        fulfillmentText: (req.body.queryResult.parameters.URL || "none") + " looks good!",
+        fulfillmentText: "That does not look like a website to me 🤔\nPlease send me a message like \"Check google.com\"!",
         source: 'backend check'
     });
 }
