@@ -22,6 +22,8 @@ exports.processRequest = async function (req, res) {
         getTeamInfo(req, res);
     } else if (req.body.queryResult.action == "set.bad") {
         addBlack(req, res);
+    } else if (req.body.queryResult.action == "set.good") {
+        addWhite(req, res);
     } else {
         console.warn(req.body.queryResult);
     }
@@ -64,6 +66,20 @@ async function addBlack(req, res) {
     let url = req.body.queryResult.outputContexts[0].parameters.URL;
 
     (new BlacklistEntry({
+        name: 'generated',
+        regex: "^(https?:\\/\\/)?(www\\.)?" + domainFromURL(url) + ".\\w{2,3}",
+    })).save()
+
+    return res.json({
+        fulfillmentText: "Thank's for telling me!",
+        source: 'backend check'
+    });
+}
+
+async function addWhite(req, res) {
+    let url = req.body.queryResult.outputContexts[0].parameters.URL;
+
+    (new WhitelistEntry({
         name: 'generated',
         regex: "^(https?:\\/\\/)?(www\\.)?" + domainFromURL(url) + ".\\w{2,3}",
     })).save()
