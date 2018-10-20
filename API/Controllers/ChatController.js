@@ -27,9 +27,9 @@ function getTeamInfo(req, res) {
     });
 
     if (req.body.queryResult.parameters.URL) {
-        let res = checkUrl(req.body.queryResult.parameters.URL);
+        let r = checkUrl(req.body.queryResult.parameters.URL);
         return res.json({
-            fulfillmentText: Array.isArray(res) ? res[Math.floor(Math.random() * res.length)] : res,
+            fulfillmentText: Array.isArray(r) ? r[Math.floor(Math.random() * r.length)] : r,
             source: 'backend check'
         });
     }
