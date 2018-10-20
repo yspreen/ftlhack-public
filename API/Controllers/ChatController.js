@@ -65,7 +65,7 @@ async function addBlack(req, res) {
 
     (new BlacklistEntry({
         name: 'generated',
-        regex: "^(https?:\/\/)?(www\.)?" + domainFromURL(url) + ".\w{2,3}",
+        regex: "^(https?:\\/\\/)?(www\\.)?" + domainFromURL(url) + ".\\w{2,3}",
     })).save()
 
     return res.json({
