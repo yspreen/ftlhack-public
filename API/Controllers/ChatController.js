@@ -11,9 +11,8 @@ exports.processRequest = function (req, res) {
 function checkUrl(url) {
     if (url.includes("google")) {
         return "Google is neutral! 🏳";
-    }
-    else if (url.includes("breitbart")) {
-        return "My fake detection is about to explode! 😱🌋";
+    } else if (url.includes("breitbart")) {
+        return ["My fake detection is about to explode! 😱🌋", "That's fake!"];
     }
     return "I don't know about that one 🤷🏽‍♀️"
 }
@@ -28,8 +27,9 @@ function getTeamInfo(req, res) {
     });
 
     if (req.body.queryResult.parameters.URL) {
+        let res = checkUrl(req.body.queryResult.parameters.URL)
         return res.json({
-            fulfillmentText: checkUrl(req.body.queryResult.parameters.URL),
+            fulfillmentText: Array.isArray(res) ? res[Math.floor(Math.random() * res.length)] : res,
             source: 'backend check'
         });
     }
