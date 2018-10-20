@@ -27,7 +27,7 @@ function getTeamInfo(req, res) {
     });
 
     if (req.body.queryResult.parameters.URL) {
-        let res = checkUrl(req.body.queryResult.parameters.URL)
+        let res = checkUrl(req.body.queryResult.parameters.URL);
         return res.json({
             fulfillmentText: Array.isArray(res) ? res[Math.floor(Math.random() * res.length)] : res,
             source: 'backend check'
