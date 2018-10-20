@@ -19,7 +19,9 @@ let NEUTRAL_RESPONSE = [
 
 exports.processRequest = async function (req, res) {
     if (req.body.queryResult.action == "check.url") {
-        getTeamInfo(req, res)
+        getTeamInfo(req, res);
+    } else if (req.body.queryResult.action == "set.bad") {
+        addBlack(req, res);
     } else {
         console.warn(req.body.queryResult);
     }
@@ -38,6 +40,14 @@ function s_to_r(str) {
     regex: r_to_s(/^(https?:\/\/)?(www\.)?breitbart.\w{2,3}/),
 })).save();*/
 
+async function addBlack(req, res) {
+    console.warn(req.body.queryResult.outputContexts[0].parameters);
+
+    return res.json({
+        fulfillmentText: "Thank's for telling me!",
+        source: 'backend check'
+    });
+}
 async function checkUrl(url, callback) {
     let stop = false;
     let result = 0;
